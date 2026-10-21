@@ -63,6 +63,24 @@ def _group_program_courses(group) -> list:
     return ordered
 
 
+def student_visible_course_ids(db: Session, user: User) -> set[str]:
+    """Курсы, доступные студенту: на которые он записан + программа его
+    должности/отдела. Чужие курсы студент не видит.
+    """
+    from app.models import Enrollment
+
+    ids = {
+        row.course_id
+        for row in db.query(Enrollment.course_id)
+        .filter(Enrollment.user_id == user.id)
+        .all()
+    }
+    if user.group is not None:
+        for course in _group_program_courses(user.group):
+            ids.add(course.id)
+    return ids
+
+
 def enroll_user_in_group_courses(
     db: Session,
     user: User,

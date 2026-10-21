@@ -13,27 +13,11 @@ from app.models.certificate import Certificate
 from app.models.print_test import PrintTest
 from app.schemas.course import CourseCreate, CourseRead, CourseListItem
 from app.dependencies import get_current_user, require_role
-from app.services.enrollment import _group_program_courses
+from app.services.enrollment import student_visible_course_ids
 from app.config import get_settings
 
 router = APIRouter(prefix="/courses", tags=["Courses"])
 settings = get_settings()
-
-
-def _student_visible_course_ids(db: Session, user: User) -> set[str]:
-    """Курсы, доступные студенту: на которые он записан + программа его
-    должности/отдела. Чужие курсы студент не видит.
-    """
-    ids = {
-        row.course_id
-        for row in db.query(Enrollment.course_id)
-        .filter(Enrollment.user_id == user.id)
-        .all()
-    }
-    if user.group is not None:
-        for course in _group_program_courses(user.group):
-            ids.add(course.id)
-    return ids
 
 
 @router.get("/", response_model=list[CourseListItem])
@@ -45,7 +29,7 @@ def list_courses(
     # Студент видит только опубликованные курсы из своей программы/назначений.
     # HR и admin получают полный список (нужно для конструктора и статистики).
     if user.role == "student":
-        visible = _student_visible_course_ids(db, user)
+        visible = student_visible_course_ids(db, user)
         courses = [c for c in courses if c.is_published and c.id in visible]
     result = []
     for c in courses:
@@ -76,7 +60,7 @@ def get_course(
         raise HTTPException(status_code=404, detail="Course not found")
     # Студент может открыть только свой курс (записан / из программы должности).
     # 404 (а не 403), чтобы не раскрывать существование чужих/черновых курсов.
-    if user.role == "student" and course.id not in _student_visible_course_ids(db, user):
+    if user.role == "student" and course.id not in student_visible_course_ids(db, user):
         raise HTTPException(status_code=404, detail="Course not found")
     return course
 

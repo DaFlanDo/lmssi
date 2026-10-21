@@ -17,6 +17,7 @@ from app.schemas.progress import CourseProgressRead, LessonProgressRead, QuizSub
 from app.dependencies import get_current_user, require_role
 from app.services.progress import calculate_course_progress
 from app.services.certificates import issue_certificate_if_eligible
+from app.services.enrollment import student_visible_course_ids
 from app.models import Lesson as LessonModel, Module as ModuleModel
 from app.models import Enrollment
 
@@ -240,6 +241,13 @@ def complete_lesson(
         course = (
             db.query(Course).filter(Course.id == module.course_id).first() if module else None
         )
+        # Студент может проходить только свои курсы — иначе, зная id урока,
+        # можно было бы «пройти» чужой курс и получить по нему сертификат.
+        # 404, как и в GET /courses/{id}, чтобы не раскрывать чужие курсы.
+        if user.role == "student" and (
+            course is None or course.id not in student_visible_course_ids(db, user)
+        ):
+            raise HTTPException(status_code=404, detail="Lesson not found")
         if course:
             blockers = _lesson_completion_blockers(db, user.id, lesson, course)
             if blockers:
