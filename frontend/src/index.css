@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-light: #e0e7ff;
+  --color-brand: #2563eb;
+  --color-brand-dark: #1e3a8a;
+  --color-ai-light: #fef3c7;
+  --color-ai: #f59e0b;
+  --color-ai-dark: #d97706;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased font-sans;
+  }
+}
+
+@layer utilities {
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  .bento-card {
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+  }
+  .bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.12);
+  }
+  .ai-dropzone {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+    border: 2px dashed rgba(245, 158, 11, 0.3);
+    transition: all 0.3s ease;
+  }
+  .ai-dropzone:hover {
+    border-color: rgba(245, 158, 11, 0.8);
+    box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.2);
+    transform: translateY(-2px);
+  }
+  .ai-gradient-text {
+    background: linear-gradient(to right, #f59e0b, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .gradient-text {
+    background: linear-gradient(to right, #2563eb, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  /* ── Rich-text editor content styles ─────────────────────────────────────── */
+  .prose-editor {
+    color: #334155;
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    font-weight: 500;
+    font-family: var(--font-sans);
+  }
+  .prose-editor:empty::before {
+    content: attr(data-placeholder);
+    color: #cbd5e1;
+    pointer-events: none;
+    float: left;
+    height: 0;
+  }
+  /* Tiptap placeholder: пустой первый параграф получает класс is-editor-empty */
+  .prose-editor p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    color: #cbd5e1;
+    pointer-events: none;
+    float: left;
+    height: 0;
+  }
+  /* Tiptap фокус — без обводки ProseMirror по умолчанию */
+  .prose-editor.ProseMirror:focus,
+  .prose-editor .ProseMirror:focus { outline: none; }
+  .prose-editor h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1.25;
+    margin: 1.25rem 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .prose-editor h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    line-height: 1.35;
+    margin: 1.1rem 0 0.6rem;
+  }
+  .prose-editor h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #334155;
+    line-height: 1.4;
+    margin: 1rem 0 0.5rem;
+  }
+  .prose-editor blockquote {
+    border-left: 3px solid #2563eb;
+    margin: 1rem 0;
+    padding: 0.5rem 0 0.5rem 1.25rem;
+    color: #475569;
+    font-style: italic;
+    background: #f8faff;
+    border-radius: 0 8px 8px 0;
+  }
+  .prose-editor ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+  }
+  .prose-editor ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+  }
+  .prose-editor li {
+    margin: 0.2rem 0;
+  }
+  .prose-editor code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: ui-monospace, 'Cascadia Code', monospace;
+    font-size: 0.875em;
+    color: #0f172a;
+  }
+  .prose-editor a {
+    color: #2563eb;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-editor strong { font-weight: 700; color: #0f172a; }
+  .prose-editor em { font-style: italic; }
+  .prose-editor u  { text-decoration: underline; text-underline-offset: 2px; }
+  .prose-editor s  { text-decoration: line-through; color: #94a3b8; }
+}
+
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(20px, -30px) scale(1.08);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.95);
+  }
+}
+
+.animate-blob {
+  animation: blob 10s infinite ease-in-out;
+}
+
+/* ── Hero «дышащие» световые пятна ─────────────────────────────────────────── */
+@keyframes heroFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(14px, -16px) scale(1.06); }
+}
+.hero-blob {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform;
+  animation: heroFloat 16s ease-in-out infinite;
+}
+.hero-blob-delay {
+  animation-duration: 20s;
+  animation-delay: -7s;
+}
+
+/* ── Skeleton shimmer ──────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(37, 99, 235, 0.07);
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  animation: shimmer 1.6s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-blob { animation: none; }
+  .skeleton::after { animation: none; }
+}
+
+/* ── Certificate styles ───────────────────────────────────────────────────── */
+.cert-paper {
+  background:
+    radial-gradient(900px 400px at 50% -5%, rgba(37, 99, 235, 0.04), transparent 55%),
+    radial-gradient(600px 300px at 50% 110%, rgba(30, 58, 138, 0.04), transparent 50%),
+    #ffffff;
+  position: relative;
+}
+/* Outer border: brand blue */
+.cert-paper::before {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border: 2px solid #1e3a8a;
+  border-radius: 20px;
+  pointer-events: none;
+}
+/* Inner border: gold accent */
+.cert-paper::after {
+  content: '';
+  position: absolute;
+  inset: 28px;
+  border: 1px solid rgba(201, 162, 39, 0.38);
+  border-radius: 12px;
+  pointer-events: none;
+}
+.cert-gold-text {
+  background: linear-gradient(180deg, #b8860b 0%, #d4af37 45%, #fff7c2 55%, #d4af37 70%, #8a6508 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.05));
+}
+.cert-name {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+}
+.cert-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.cert-stamp {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px double #1e3a8a;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-align: center;
+  font-size: 10px;
+  text-transform: uppercase;
+  transform: rotate(-8deg);
+  opacity: 0.85;
+  position: relative;
+  background:
+    radial-gradient(circle at center, rgba(30, 58, 138, 0.04), transparent 70%);
+}
+.cert-stamp::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(30, 58, 138, 0.5);
+  border-radius: 50%;
+}
+.cert-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #c9a227;
+}
+.cert-divider::before,
+.cert-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a227, transparent);
+}
+
+/* Wheat ornament dots */
+.cert-corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+@media print {
+  body { background: white !important; }
+  .no-print { display: none !important; }
+  .cert-paper { box-shadow: none !important; }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
