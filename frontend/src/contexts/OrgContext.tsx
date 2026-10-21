@@ -26,7 +26,7 @@ function applyTheme(theme: string) {
 }
 
 const DEFAULT: OrgSettings = {
-  name: 'Lumen LMS',
+  name: 'LMSSI',
   tagline: 'Корпоративная платформа обучения',
   logo_url: null,
   theme: 'blue',

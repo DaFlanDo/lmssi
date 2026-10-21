@@ -28,7 +28,7 @@ import { CountUp } from '../components/ui/CountUp';
 import { useOrg } from '../contexts/OrgContext';
 
 /* ────────────────────────────────────────────────────────────────────────────
-   Промо-страница Lumen — «лицо продукта».
+   Промо-страница LMSSI — «лицо продукта».
    Публичный лендинг: герой, возможности (bento), ИИ-блок, роли, сертификаты,
    цифры и финальный CTA. Полностью на фирменной палитре и компонентах проекта.
    ──────────────────────────────────────────────────────────────────────────── */
@@ -75,14 +75,14 @@ function Eyebrow({ children, tone = 'blue' }: { children: ReactNode; tone?: 'blu
   );
 }
 
-/* ── Wordmark Lumen ─────────────────────────────────────────────────────────── */
+/* ── Wordmark LMSSI ─────────────────────────────────────────────────────────── */
 function Wordmark({ className = '' }: { className?: string }) {
   return (
     <span
       className={className}
       style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, letterSpacing: '-0.01em' }}
     >
-      <span style={{ color: '#1e293b' }}>Lu</span>
+      <span style={{ color: '#1e293b' }}>LMS</span>
       <span
         style={{
           background: 'linear-gradient(to right, #2563eb, #d4af37)',
@@ -91,7 +91,7 @@ function Wordmark({ className = '' }: { className?: string }) {
           backgroundClip: 'text',
         }}
       >
-        men
+        SI
       </span>
     </span>
   );
@@ -845,7 +845,7 @@ function Testimonial() {
             </div>
             <div className="text-left">
               <p className="text-sm font-extrabold text-slate-800">Отдел кадров</p>
-              <p className="text-xs font-semibold text-slate-400">внедрение Lumen</p>
+              <p className="text-xs font-semibold text-slate-400">внедрение LMSSI</p>
             </div>
           </div>
           <div className="mt-5 flex items-center justify-center gap-1">
@@ -935,7 +935,7 @@ function Footer({ orgName }: { orgName: string }) {
 /* ── Страница ───────────────────────────────────────────────────────────────── */
 export function LandingPage() {
   const { org } = useOrg();
-  const orgName = org?.name && org.name !== 'Lumen LMS' ? org.name : 'ОАО «Барановичхлебпродукт»';
+  const orgName = org?.name && org.name !== 'LMSSI' ? org.name : 'ОАО «Барановичхлебпродукт»';
 
   useEffect(() => {
     const html = document.documentElement;
