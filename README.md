@@ -10,11 +10,22 @@ FastAPI + SQLAlchemy 2.0 + JWT (backend) · SQLite или PostgreSQL.
 
 ---
 
-## Быстрый старт (одной командой)
+## Быстрый старт
+
+### Docker (PostgreSQL + backend + собранный фронт)
+
+```bash
+cp .env.docker.example .env     # вписать SECRET_KEY (openssl rand -hex 32)
+docker compose up --build       # http://localhost:8000
+```
+
+Демо-данные загружаются автоматически (`SEED_DEMO=1`), логины — ниже.
+
+### Без Docker
 
 Нужны заранее установленные **Python 3.9+** и **Node.js 18+**.
 
-### macOS / Linux
+#### macOS / Linux
 
 ```bash
 chmod +x scripts/*.sh           # один раз — сделать скрипты исполняемыми
@@ -22,7 +33,7 @@ chmod +x scripts/*.sh           # один раз — сделать скрип�
 ./scripts/start.sh              # запуск backend :8000 + frontend :5173
 ```
 
-### Windows (PowerShell)
+#### Windows (PowerShell)
 
 ```powershell
 # если скрипты заблокированы политикой — один раз:
@@ -179,6 +190,10 @@ LMSSI/
 - **Документация API:** http://localhost:8000/docs (Swagger UI).
 - **Сбросить базу (SQLite):** удалить `backend/lms.db` и заново выполнить
   `python create_admin.py` + seed-скрипты.
+- **Тесты backend:** `cd backend && pip install -r requirements-dev.txt && pytest`.
+  Каждый тест работает на отдельной SQLite-базе, ИИ не вызывается.
+- **CI:** GitHub Actions (`.github/workflows/ci.yml`) — тесты, проверка миграций,
+  линтер и сборка фронта, сборка Docker-образа.
 - **Миграции БД (Alembic):** применяются автоматически при старте backend.
   Новая миграция после изменения моделей:
   `cd backend && python -m alembic revision --autogenerate -m "описание"`.
