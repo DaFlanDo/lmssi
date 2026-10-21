@@ -121,7 +121,8 @@ cd backend
 python3 -m venv venv
 source venv/bin/activate            # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env                # отредактировать при необходимости
+cp .env.example .env                # затем вписать SECRET_KEY: openssl rand -hex 32
+                                    # (без него backend не запустится)
 python create_admin.py              # таблицы + админ + отделы
 python seed_demo.py                 # демо-пользователи и курсы (опционально)
 python seed_electrician.py          # курсы «Электрик» + SVG-схемы (опционально)
