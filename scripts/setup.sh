@@ -77,6 +77,7 @@ fi
 source venv/bin/activate
 python -m pip install --quiet --upgrade pip
 python -m pip install --quiet -r requirements.txt
+[ "$USE_POSTGRES" = 1 ] && python -m pip install --quiet -r requirements-postgres.txt
 ok "Python-зависимости установлены"
 
 # ── 3. .env ──────────────────────────────────────────────────────────────────

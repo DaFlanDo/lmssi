@@ -1,4 +1,5 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+// Пустая строка = тот же origin (фронт раздаёт сам backend: Docker, .exe)
+const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8000';
 
 // ─── Token helpers ───────────────────────────────────────────────────────────
 export const getToken = (): string | null => localStorage.getItem('lms_token');

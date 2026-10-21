@@ -8,9 +8,7 @@ import {
 } from 'lucide-react';
 import { PageLayout } from '../../components/layout/PageLayout';
 import { Sidebar } from '../../components/Sidebar';
-import { getToken } from '../../lib/api';
-
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+import { getToken, API_BASE_URL as API_BASE } from '../../lib/api';
 
 type Step = 'upload' | 'params' | 'generating' | 'done' | 'error';
 

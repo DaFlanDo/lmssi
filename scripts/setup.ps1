@@ -69,6 +69,7 @@ if (-not $venvOk) {
 } else { Ok "venv already exists" }
 & $venvPy -m pip install --upgrade pip
 & $venvPy -m pip install -r requirements.txt
+if ($Postgres) { & $venvPy -m pip install -r requirements-postgres.txt }
 Ok "Python dependencies installed"
 
 # -- 3. .env ------------------------------------------------------------------
