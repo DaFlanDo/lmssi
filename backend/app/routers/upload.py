@@ -40,7 +40,7 @@ def upload_file(
                 written += len(chunk)
                 if written > max_bytes:
                     raise HTTPException(
-                        status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                        status_code=status.HTTP_413_CONTENT_TOO_LARGE,
                         detail=f"Файл больше {settings.max_upload_mb} МБ",
                     )
                 buffer.write(chunk)
