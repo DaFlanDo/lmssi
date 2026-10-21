@@ -66,6 +66,8 @@ def _upgrade_legacy_db() -> None:
     for sql in _LEGACY_ALTERS:
         table, column = sql.split()[2], sql.split()[5]
         if column not in {c["name"] for c in insp.get_columns(table)}:
+            if engine.dialect.name == "postgresql":
+                sql = sql.replace(" DATETIME", " TIMESTAMP WITH TIME ZONE")
             with engine.begin() as conn:
                 conn.execute(text(sql))
 
