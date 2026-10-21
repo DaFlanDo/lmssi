@@ -179,6 +179,10 @@ LMSSI/
 - **Документация API:** http://localhost:8000/docs (Swagger UI).
 - **Сбросить базу (SQLite):** удалить `backend/lms.db` и заново выполнить
   `python create_admin.py` + seed-скрипты.
+- **Миграции БД (Alembic):** применяются автоматически при старте backend.
+  Новая миграция после изменения моделей:
+  `cd backend && python -m alembic revision --autogenerate -m "описание"`.
+  Старые базы, созданные до перехода на Alembic, подхватываются без потери данных.
 - **Проверка кода frontend:** `cd frontend && npm run lint`.
 - **Порты:** backend 8000, frontend 5173 — задаются в `backend/run.py` и
   `frontend/vite.config.ts`; CORS-источники — в `backend/app/config.py`.

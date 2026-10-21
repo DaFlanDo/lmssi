@@ -8,9 +8,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from sqlalchemy import text as sa_text
 from app.config import get_settings
-from app.database import Base, engine
+from app.db_migrate import run_migrations
 from app.routers import auth, users, groups, courses, enrollments, progress, upload, generation, ai_assistant, certificates
 from app.routers import print_tests, notifications, org_settings
 
@@ -52,62 +51,16 @@ if not _FRONTEND_DIST:
         _FRONTEND_DIST = _candidate
 SERVE_SPA = bool(_FRONTEND_DIST and os.path.isdir(_FRONTEND_DIST))
 
-# Create tables (will be replaced by Alembic migrations)
-Base.metadata.create_all(bind=engine)
+# Схема БД — через Alembic (app/migrations), см. app/db_migrate.py
+run_migrations()
 
-# SQLite safe migrations: добавляем колонки в существующие таблицы
-_migrations = [
-    "ALTER TABLE enrollments ADD COLUMN due_date DATETIME",
-    "ALTER TABLE users ADD COLUMN position_id INTEGER",
-    "ALTER TABLE module_test_attempts ADD COLUMN focus_violations INTEGER DEFAULT 0",
-    "ALTER TABLE courses ADD COLUMN sequential BOOLEAN DEFAULT false",
-    "ALTER TABLE courses ADD COLUMN require_video BOOLEAN DEFAULT false",
-]
-# Seed default org settings
+# Настройки организации по умолчанию (одна строка с id=1)
 from app.models.org_settings import OrgSettings as _OrgSettings
 from app.database import SessionLocal as _SessionLocal
-try:
-    _db = _SessionLocal()
-    if not _db.query(_OrgSettings).filter(_OrgSettings.id == 1).first():
+with _SessionLocal() as _db:
+    if not _db.get(_OrgSettings, 1):
         _db.add(_OrgSettings(id=1))
         _db.commit()
-    _db.close()
-except Exception:
-    pass
-
-for _sql in _migrations:
-    try:
-        with engine.connect() as _conn:
-            _conn.execute(sa_text(_sql))
-            _conn.commit()
-    except Exception:
-        pass
-
-# Перенос данных из устаревших Position в иерархию Group (best-effort).
-# Сопоставление по совпадению имён; выполняется один раз, дубли игнорируются.
-# Таблицы positions/position_course и колонка users.position_id остаются
-# в БД «спящими» — не дропаем, чтобы не терять данные.
-_data_migrations = [
-    # Курсы должности → курсы одноимённой группы
-    'INSERT INTO group_course (group_id, course_id, "order") '
-    'SELECT g.id, pc.course_id, pc."order" FROM position_course pc '
-    'JOIN positions p ON p.id = pc.position_id '
-    'JOIN groups g ON g.name = p.name '
-    'WHERE NOT EXISTS (SELECT 1 FROM group_course gc '
-    '  WHERE gc.group_id = g.id AND gc.course_id = pc.course_id)',
-    # Должность пользователя → одноимённая группа, если группа не задана
-    'UPDATE users SET group_id = ('
-    '  SELECT g.id FROM groups g JOIN positions p ON g.name = p.name '
-    '  WHERE p.id = users.position_id LIMIT 1) '
-    'WHERE group_id IS NULL AND position_id IS NOT NULL',
-]
-for _sql in _data_migrations:
-    try:
-        with engine.connect() as _conn:
-            _conn.execute(sa_text(_sql))
-            _conn.commit()
-    except Exception:
-        pass
 
 # Routers — all under /api prefix
 app.include_router(auth.router, prefix="/api")

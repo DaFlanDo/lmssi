@@ -30,12 +30,14 @@ datas = [
     (os.path.join(BACKEND, "seed_demo.py"), "."),
     (os.path.join(BACKEND, "seed_electrician.py"), "."),
     (os.path.join(BACKEND, "seed_electrician_svgs.py"), "."),
+    # Alembic читает миграции с диска, а не из PYZ — кладём каталог рядом
+    (os.path.join(BACKEND, "app", "migrations"), os.path.join("app", "migrations")),
 ]
 binaries = []
 hiddenimports = collect_submodules("app")
 
 # Пакеты с динамическими импортами / данными — собираем целиком.
-for pkg in ("uvicorn", "passlib", "jose", "pypdf", "docx", "email_validator"):
+for pkg in ("uvicorn", "passlib", "jose", "pypdf", "docx", "email_validator", "alembic"):
     try:
         d, b, h = collect_all(pkg)
         datas += d

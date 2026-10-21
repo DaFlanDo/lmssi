@@ -10,9 +10,10 @@ Wikimedia + проверенные обучающие ролики YouTube. Ви
 import os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 
-from app.database import SessionLocal, engine, Base
+from app.database import SessionLocal
 import app.models  # noqa: F401 — регистрирует модели
-Base.metadata.create_all(bind=engine)
+from app.db_migrate import run_migrations
+run_migrations()
 
 from app.models.user import User
 from app.models.group import Group, group_course

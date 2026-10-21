@@ -7,10 +7,11 @@ import os
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-from app.database import engine, SessionLocal, Base
+from app.database import SessionLocal
 import app.models  # noqa: F401 — register all models with Base
 
-Base.metadata.create_all(bind=engine)
+from app.db_migrate import run_migrations
+run_migrations()
 
 from app.models.user import User
 from app.models.group import Group
