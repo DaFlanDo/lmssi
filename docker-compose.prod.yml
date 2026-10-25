@@ -1,0 +1,30 @@
+# Продакшен за общим Caddy (см. репозиторий deploy):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+# Порт наружу не публикуется: Caddy ходит в контейнер по сети web
+# и сам выдаёт HTTPS. Нужен Docker Compose 2.24+ (для !reset).
+# PUBLIC_HOST — домен сайта, например lms.example.com
+name: lmssi
+
+services:
+  db:
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Задайте POSTGRES_PASSWORD в .env}
+
+  app:
+    restart: unless-stopped
+    ports: !reset []
+    environment:
+      DATABASE_URL: postgresql://lmssi:${POSTGRES_PASSWORD:?Задайте POSTGRES_PASSWORD в .env}@db:5432/lmssi
+      CORS_ORIGINS: '["https://${PUBLIC_HOST:?Задайте PUBLIC_HOST в .env}"]'
+    # Схема и IP клиента — из заголовков Caddy
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000",
+              "--proxy-headers", "--forwarded-allow-ips", "*"]
+    networks:
+      default:
+      web:
+        aliases: [lmssi-app]
+
+networks:
+  web:
+    external: true
