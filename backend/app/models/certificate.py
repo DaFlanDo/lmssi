@@ -14,7 +14,7 @@ class Certificate(Base):
     __tablename__ = "certificates"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    # Например: BHP-2025-000042
+    # Например: NBT-2026-000042
     certificate_number = Column(String, unique=True, nullable=False, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     course_id = Column(String, ForeignKey("courses.id"), nullable=False)

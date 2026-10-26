@@ -219,7 +219,7 @@ function FloatingPreview() {
           <HeroAura spotlight={false} />
           <div className="relative z-10 h-full flex flex-col justify-center px-5 text-white">
             <p className="text-[10px] font-bold uppercase tracking-widest text-blue-200">Прогресс обучения</p>
-            <p className="text-2xl font-black mt-0.5">Охрана труда · 2025</p>
+            <p className="text-2xl font-black mt-0.5">Git и code review</p>
             <div className="mt-2 h-1.5 w-full rounded-full bg-white/25 overflow-hidden">
               <motion.div
                 className="h-full rounded-full bg-white"
@@ -250,8 +250,8 @@ function FloatingPreview() {
         {/* список уроков */}
         <div className="space-y-2">
           {[
-            { t: 'Введение в технику безопасности', done: true },
-            { t: 'Средства индивидуальной защиты', done: true },
+            { t: 'Ветки и коммиты', done: true },
+            { t: 'Pull request и ревью', done: true },
             { t: 'Итоговое тестирование', done: false },
           ].map((row) => (
             <div key={row.t} className="flex items-center gap-3 rounded-xl px-3 py-2.5 bg-white border border-slate-100">
@@ -288,7 +288,7 @@ function FloatingPreview() {
         </div>
         <div>
           <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Сертификат</p>
-          <p className="text-sm font-black text-slate-800">Выдан · №2025-014</p>
+          <p className="text-sm font-black text-slate-800">Выдан · NBT-2026-014</p>
         </div>
       </motion.div>
 
@@ -832,9 +832,9 @@ function Certificates() {
               </p>
               <div className="my-4 mx-auto w-24 h-px" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
               <p className="text-sm font-semibold text-slate-500">успешно завершил курс</p>
-              <p className="text-base font-extrabold text-slate-800 mt-1">«Охрана труда и техника безопасности»</p>
+              <p className="text-base font-extrabold text-slate-800 mt-1">«Информационная безопасность для всех»</p>
               <div className="mt-6 flex items-center justify-between text-[11px] font-bold text-slate-400">
-                <span>№ 2025-014</span>
+                <span>№ NBT-2026-014</span>
                 <span className="inline-flex items-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
                   Подлинность подтверждена
@@ -991,7 +991,7 @@ function Footer({ orgName }: { orgName: string }) {
 /* ── Страница ───────────────────────────────────────────────────────────────── */
 export function LandingPage() {
   const { org } = useOrg();
-  const orgName = org?.name && org.name !== 'LMSSI' ? org.name : 'ОАО «Барановичхлебпродукт»';
+  const orgName = org?.name && org.name !== 'LMSSI' ? org.name : 'ООО «НордБайт»';
 
   useEffect(() => {
     const html = document.documentElement;

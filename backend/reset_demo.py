@@ -19,7 +19,7 @@ from app.config import get_settings
 from app.database import engine
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SEED_SCRIPTS = ["create_admin.py", "seed_demo.py", "seed_electrician.py"]
+SEED_SCRIPTS = ["create_admin.py", "seed_demo.py"]
 
 settings = get_settings()
 if not settings.demo_mode:
@@ -37,7 +37,7 @@ else:
 engine.dispose()
 print("✓ База очищена")
 
-# 2. Загрузки посетителей. Картинки сида seed_electrician.py запишет заново
+# 2. Загрузки посетителей. Схемы и обложки курсов seed_demo.py запишет заново
 upload_dir = settings.upload_dir
 if os.path.isdir(upload_dir):
     for name in os.listdir(upload_dir):

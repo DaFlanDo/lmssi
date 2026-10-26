@@ -123,12 +123,11 @@ if ($Postgres) {
 # -- 5. Initialize DB and demo data -------------------------------------------
 Step "Initializing database"
 & $venvPy create_admin.py
-Ok "Tables created, admin and departments added"
+Ok "Tables created, admin added"
 
 if (-not $NoSeed) {
     Step "Seeding demo data (may take a minute)"
     & $venvPy seed_demo.py
-    & $venvPy seed_electrician.py
     Ok "Demo courses, users and materials loaded"
 } else { Warn "Seeding skipped (-NoSeed)" }
 
@@ -148,9 +147,9 @@ Write-Host "   Setup complete" -ForegroundColor Green
 Write-Host "============================================" -ForegroundColor Green
 if (-not $NoSeed) {
     Write-Host "`nDemo logins (password / role):" -ForegroundColor DarkGray
-    Write-Host "  admin@barhleb.by    / admin123     - administrator"
-    Write-Host "  hr@barhleb.by       / hr123        - HR / methodist"
-    Write-Host "  sidorov@barhleb.by  / student123   - student (and other employees)"
+    Write-Host "  admin@nordbyte.dev      / admin123     - administrator"
+    Write-Host "  hr@nordbyte.dev         / hr123        - HR / methodist"
+    Write-Host "  a.sidorov@nordbyte.dev  / student123   - employee (and others)"
 }
 Write-Host "`nStart:  .\scripts\start.ps1    (backend :8000  +  frontend :5173)" -ForegroundColor Blue
 

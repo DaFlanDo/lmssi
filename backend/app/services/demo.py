@@ -20,9 +20,9 @@ from app.models.user import User
 
 # Роль на кнопке → сид-аккаунт
 DEMO_ACCOUNTS: dict[str, str] = {
-    "student": "sidorov@barhleb.by",
-    "hr": "hr@barhleb.by",
-    "admin": "admin@barhleb.by",
+    "student": "a.sidorov@nordbyte.dev",
+    "hr": "hr@nordbyte.dev",
+    "admin": "admin@nordbyte.dev",
 }
 DEMO_EMAILS = frozenset(DEMO_ACCOUNTS.values())
 

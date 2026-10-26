@@ -20,7 +20,7 @@ settings = get_settings()
 
 app = FastAPI(
     title="LMSSI API",
-    description="LMS для ОАО «Барановичхлебпродукт»",
+    description="Корпоративная LMS с ИИ-генерацией курсов",
     version="1.0.0",
 )
 

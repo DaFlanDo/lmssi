@@ -37,7 +37,7 @@ def test_demo_login_issues_token_for_role(client, demo_mode, demo_users):
     assert r.status_code == 200
     token = r.json()["access_token"]
     me = client.get("/api/auth/me", headers={"Authorization": f"Bearer {token}"}).json()
-    assert me["email"] == "hr@barhleb.by" and me["role"] == "hr"
+    assert me["email"] == demo.DEMO_ACCOUNTS["hr"] and me["role"] == "hr"
 
 
 def test_demo_login_rejects_unknown_role(client, demo_mode, demo_users):

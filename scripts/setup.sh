@@ -5,7 +5,7 @@
 #  Использование:
 #    ./scripts/setup.sh                 # SQLite + демо-данные (рекомендуется)
 #    ./scripts/setup.sh --postgres      # PostgreSQL (создаёт БД lmssi)
-#    ./scripts/setup.sh --no-seed       # без демо-данных (только админ и отделы)
+#    ./scripts/setup.sh --no-seed       # без демо-данных (только администратор)
 #    ./scripts/setup.sh --run           # после установки сразу запустить серверы
 #
 #  Что делает: проверяет окружение, ставит зависимости backend и frontend,
@@ -140,12 +140,11 @@ fi
 # ── 5. Инициализация БД и демо-данные ────────────────────────────────────────
 step "Инициализация базы данных"
 python create_admin.py
-ok "Таблицы созданы, админ и отделы добавлены"
+ok "Таблицы созданы, администратор добавлен"
 
 if [ "$SEED" -eq 1 ]; then
   step "Наполнение демо-данными (это может занять минуту)"
   python seed_demo.py
-  python seed_electrician.py
   ok "Демо-курсы, пользователи и материалы загружены"
 else
   warn "Сидинг пропущен (--no-seed)"
@@ -168,9 +167,9 @@ echo -e "${G}║   Установка завершена                       �
 echo -e "${G}╚════════════════════════════════════════════╝${N}"
 if [ "$SEED" -eq 1 ]; then
   echo -e "\n${D}Демо-логины (пароль / роль):${N}"
-  echo "  admin@barhleb.by    / admin123     — администратор"
-  echo "  hr@barhleb.by       / hr123        — HR / методист"
-  echo "  sidorov@barhleb.by  / student123   — студент (и др. сотрудники)"
+  echo "  admin@nordbyte.dev      / admin123     — администратор"
+  echo "  hr@nordbyte.dev         / hr123        — HR / методист"
+  echo "  a.sidorov@nordbyte.dev  / student123   — сотрудник (и другие)"
 fi
 echo -e "\nЗапуск:  ${B}./scripts/start.sh${N}    (backend :8000  +  frontend :5173)"
 

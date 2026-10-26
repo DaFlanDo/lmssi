@@ -90,7 +90,7 @@ export function AdminSettings() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="ОАО «Барановичхлебпродукт»"
+                    placeholder="ООО «НордБайт»"
                     className="w-full px-4 py-3.5 rounded-2xl border border-slate-200 bg-white focus:border-brand focus:ring-4 focus:ring-brand/10 outline-none font-medium text-slate-700 transition-all"
                   />
                   <p className="text-xs text-slate-400 font-medium mt-1.5">

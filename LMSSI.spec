@@ -28,8 +28,10 @@ datas = [
     (FRONTEND_DIST, "frontend_dist"),
     (os.path.join(BACKEND, "create_admin.py"), "."),
     (os.path.join(BACKEND, "seed_demo.py"), "."),
-    (os.path.join(BACKEND, "seed_electrician.py"), "."),
-    (os.path.join(BACKEND, "seed_electrician_svgs.py"), "."),
+    (os.path.join(BACKEND, "seed_kit.py"), "."),
+    (os.path.join(BACKEND, "seed_courses.py"), "."),
+    (os.path.join(BACKEND, "seed_svgs.py"), "."),
+    (os.path.join(BACKEND, "scripts", "add_course_covers.py"), "scripts"),
     # Alembic читает миграции с диска, а не из PYZ — кладём каталог рядом
     (os.path.join(BACKEND, "app", "migrations"), os.path.join("app", "migrations")),
 ]

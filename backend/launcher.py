@@ -136,7 +136,7 @@ def first_run_setup(base: str, env_path: str, log: logging.Logger) -> None:
 
     scripts = ["create_admin.py"]
     if do_seed:
-        scripts += ["seed_demo.py", "seed_electrician.py"]
+        scripts += ["seed_demo.py"]
     for script in scripts:
         path = os.path.join(resource_dir(), script)
         if not os.path.isfile(path):

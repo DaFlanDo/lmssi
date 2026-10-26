@@ -10,7 +10,6 @@ python create_admin.py
 DEMO_MARK="${UPLOAD_DIR:-/data/uploads}/.demo_seeded"
 if [ "${SEED_DEMO:-0}" = "1" ] && [ ! -f "$DEMO_MARK" ]; then
   python seed_demo.py
-  python seed_electrician.py
   touch "$DEMO_MARK"
 fi
 
