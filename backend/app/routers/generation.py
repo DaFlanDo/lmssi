@@ -12,6 +12,7 @@ from app.database import SessionLocal
 from app.dependencies import require_role
 from app.models import User, Course, Module, Lesson, Block, ModuleTest
 from app.services import generation as gen_service
+from app.services.demo import check_ai_quota
 
 router = APIRouter(prefix="/generation", tags=["Generation"])
 
@@ -217,6 +218,7 @@ async def generate_course(
     user: User = Depends(require_role("hr")),
 ):
     """Запускает фоновую генерацию, возвращает job_id для опроса прогресса."""
+    check_ai_quota(user, "generate")
     if not (1 <= modules_count <= 10):
         raise HTTPException(400, "modules_count должен быть от 1 до 10")
     if not (1 <= lessons_per_module <= 8):

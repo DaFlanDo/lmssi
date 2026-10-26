@@ -4,9 +4,12 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.models.user import User
-from app.schemas.auth import RegisterRequest, LoginRequest, TokenResponse, ChangePasswordRequest
+from app.schemas.auth import (
+    RegisterRequest, LoginRequest, TokenResponse, ChangePasswordRequest, DemoLoginRequest,
+)
 from app.schemas.user import UserRead
 from app.services.auth import hash_password, verify_password, create_access_token
+from app.services.demo import DEMO_ACCOUNTS, demo_enabled, forbid_for_demo
 from app.dependencies import get_current_user
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
@@ -61,6 +64,27 @@ def login(body: LoginRequest, db: Session = Depends(get_db)):
     return TokenResponse(access_token=token, user=UserRead.model_validate(user))
 
 
+@router.get("/demo")
+def demo_info():
+    """Фронт по этому ответу решает, показывать ли кнопки демо-входа."""
+    if not demo_enabled():
+        return {"enabled": False, "accounts": {}}
+    return {"enabled": True, "accounts": DEMO_ACCOUNTS}
+
+
+@router.post("/demo", response_model=TokenResponse)
+def demo_login(body: DemoLoginRequest, db: Session = Depends(get_db)):
+    """Вход без пароля под сид-аккаунтом выбранной роли — только на демо-стенде."""
+    if not demo_enabled():
+        raise HTTPException(status_code=404, detail="Демо-режим выключен")
+    user = db.query(User).filter(User.email == DEMO_ACCOUNTS[body.role]).first()
+    if not user or not user.is_active:
+        raise HTTPException(status_code=503, detail="Демо-данные ещё загружаются, попробуйте через минуту")
+
+    token = create_access_token({"sub": str(user.id), "role": user.role})
+    return TokenResponse(access_token=token, user=UserRead.model_validate(user))
+
+
 @router.get("/me", response_model=UserRead)
 def get_me(user: User = Depends(get_current_user)):
     return user
@@ -72,6 +96,7 @@ def change_password(
     db: Session = Depends(get_db),
     user: User = Depends(get_current_user),
 ):
+    forbid_for_demo(user, "менять пароль демо-аккаунта")
     if not verify_password(body.current_password, user.hashed_password):
         raise HTTPException(status_code=400, detail="Текущий пароль указан неверно")
     if len(body.new_password) < 6:

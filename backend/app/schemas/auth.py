@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pydantic import BaseModel, EmailStr
-from typing import Optional, TYPE_CHECKING
+from typing import Literal, Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from app.schemas.user import UserRead
@@ -17,6 +17,10 @@ class RegisterRequest(BaseModel):
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
+
+
+class DemoLoginRequest(BaseModel):
+    role: Literal["student", "hr", "admin"]
 
 
 class ChangePasswordRequest(BaseModel):

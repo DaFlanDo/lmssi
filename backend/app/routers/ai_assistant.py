@@ -23,6 +23,7 @@ from app.models import Lesson, User, Block
 from app.models.progress import OpenAnswerAttempt
 from app.schemas.progress import OpenAnswerSubmit, OpenAnswerResult
 from app.services.generation import _client  # переиспользуем клиента OpenAI
+from app.services.demo import check_ai_quota
 
 router = APIRouter(prefix="/ai", tags=["AI Assistant"])
 settings = get_settings()
@@ -95,6 +96,7 @@ def lesson_assistant(
     db: Session = Depends(get_db),
     user: User = Depends(get_current_user),
 ):
+    check_ai_quota(user, "assistant")
     lesson = db.query(Lesson).filter(Lesson.id == body.lesson_id).first()
     if not lesson:
         raise HTTPException(404, "Урок не найден")
@@ -173,6 +175,7 @@ def evaluate_open_answer(
     answer = (body.answer or "").strip()
     if not answer:
         raise HTTPException(400, "Ответ не может быть пустым")
+    check_ai_quota(user, "evaluate")
     if len(answer) > 5000:
         raise HTTPException(400, "Ответ слишком длинный (максимум 5000 символов)")
 

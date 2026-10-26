@@ -8,6 +8,7 @@ import {
 import {
   apiGet,
   apiPost,
+  publicGet,
   getToken,
   setToken,
   removeToken,
@@ -18,6 +19,7 @@ import type {
   RegisterRequest,
   TokenResponse,
 } from '../types';
+import type { DemoInfo, DemoRole } from '../lib/demo';
 
 interface AuthContextValue {
   user: User | null;
@@ -25,6 +27,10 @@ interface AuthContextValue {
   isAuthenticated: boolean;
   login: (data: LoginRequest) => Promise<void>;
   register: (data: RegisterRequest) => Promise<User>;
+  /** null — ещё не знаем, включён ли демо-режим на сервере */
+  demo: DemoInfo | null;
+  isDemoUser: boolean;
+  demoLogin: (role: DemoRole) => Promise<User>;
   refreshUser: () => Promise<void>;
   logout: () => void;
 }
@@ -40,11 +46,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const token = getToken();
     if (!token) return;
+    // Пока шёл запрос, могли войти заново (например, /demo/admin поверх старой сессии) —
+    // тогда ответ про прежнего пользователя уже не нужен
     apiGet<User>('/api/auth/me')
-      .then(setUser)
-      .catch(() => removeToken())
+      .then((me) => { if (getToken() === token) setUser(me); })
+      .catch(() => { if (getToken() === token) removeToken(); })
       .finally(() => setIsLoading(false));
   }, []);
+
+  const [demo, setDemo] = useState<DemoInfo | null>(null);
+  useEffect(() => {
+    publicGet<DemoInfo>('/api/auth/demo')
+      .then(setDemo)
+      .catch(() => setDemo({ enabled: false, accounts: {} }));
+  }, []);
+
+  const demoLogin = async (role: DemoRole): Promise<User> => {
+    const response = await apiPost<TokenResponse>('/api/auth/demo', { role });
+    setToken(response.access_token);
+    setUser(response.user);
+    return response.user;
+  };
+
+  const isDemoUser =
+    !!user && !!demo?.enabled && Object.values(demo.accounts).includes(user.email);
 
   const login = async (data: LoginRequest) => {
     const response = await apiPost<TokenResponse>('/api/auth/login', data);
@@ -78,6 +103,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isAuthenticated: !!user,
         login,
         register,
+        demo,
+        isDemoUser,
+        demoLogin,
         refreshUser,
         logout,
       }}

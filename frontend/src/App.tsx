@@ -5,6 +5,8 @@ import { OrgProvider } from './contexts/OrgContext';
 // Auth
 import { LoginPage } from './pages/auth/LoginPage';
 import { RegisterPage } from './pages/auth/RegisterPage';
+import { DemoEntry } from './pages/auth/DemoEntry';
+import { DemoBar } from './components/demo/DemoBar';
 
 // Admin
 import { AdminOverview } from './pages/admin/AdminOverview';
@@ -56,6 +58,7 @@ function App() {
         <Route path="/welcome" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/demo/:role" element={<DemoEntry />} />
         <Route path="/verify/:number" element={<VerifyCertificate />} />
 
         {/* Root redirect */}
@@ -250,6 +253,7 @@ function App() {
         {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <DemoBar />
     </BrowserRouter>
     </OrgProvider>
   );

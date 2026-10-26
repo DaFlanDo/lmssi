@@ -15,6 +15,7 @@ from app.dependencies import get_current_user, require_roles
 from app.services.auth import hash_password
 from app.services.progress import calculate_course_progress
 from app.services.enrollment import enroll_user_in_group_courses
+from app.services.demo import forbid_for_demo
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -297,6 +298,8 @@ def update_user(
             raise HTTPException(status_code=404, detail="Группа не найдена")
 
     fields = body.model_dump(exclude_unset=True)
+    if fields.keys() & {"role", "is_active", "email"}:
+        forbid_for_demo(user, "менять роль, почту или активность демо-аккаунта")
     group_changed = "group_id" in fields and fields["group_id"] != user.group_id
     for field, value in fields.items():
         setattr(user, field, value)
@@ -325,6 +328,7 @@ def reset_user_password(
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="Пользователь не найден")
+    forbid_for_demo(user, "сбрасывать пароль демо-аккаунта")
     if len(body.new_password) < 6:
         raise HTTPException(status_code=400, detail="Пароль должен содержать минимум 6 символов")
     user.hashed_password = hash_password(body.new_password)
@@ -343,6 +347,7 @@ def delete_user(
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="Пользователь не найден")
+    forbid_for_demo(user, "удалить демо-аккаунт")
     db.delete(user)
     db.commit()
     return {"ok": True}

@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     upload_dir: str = "uploads"
     # Лимит на один загружаемый файл (видео в уроках — самые тяжёлые)
     max_upload_mb: int = 200
+    # Публичный демо-стенд: вход одной кнопкой под сид-аккаунтами (см. services/demo.py)
+    demo_mode: bool = False
 
     # AI gateway (Wellflow — OpenAI-compatible). Ключ задаётся в .env (OPENAI_API_KEY).
     openai_api_key: str = ""

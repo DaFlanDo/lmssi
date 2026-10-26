@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { GraduationCap, Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { AuthHeroPanel } from '../../components/auth/AuthHeroPanel';
+import { DemoAccess } from '../../components/demo/DemoAccess';
 
 export function LoginPage() {
   const { login } = useAuth();
@@ -54,10 +55,12 @@ export function LoginPage() {
             transition={{ delay: 0.2 }}
           >
             <h2 className="text-4xl font-black text-slate-800 mb-2">Добро пожаловать</h2>
-            <p className="text-slate-500 font-medium mb-10">
+            <p className="text-slate-500 font-medium mb-8">
               Войдите, чтобы продолжить обучение
             </p>
           </motion.div>
+
+          <DemoAccess />
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <motion.div

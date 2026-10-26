@@ -28,6 +28,8 @@ services:
       SECRET_KEY: ${SECRET_KEY:?Задайте SECRET_KEY в .env (openssl rand -hex 32)}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       SEED_DEMO: ${SEED_DEMO:-1}
+      # Кнопки «Войти как …» без пароля и ограничения для общих демо-аккаунтов
+      DEMO_MODE: ${DEMO_MODE:-1}
       CORS_ORIGINS: '["http://localhost:8000"]'
     ports:
       - "8000:8000"
