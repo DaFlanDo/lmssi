@@ -26,6 +26,8 @@ import { BrandMark } from '../components/BrandMark';
 import { HeroAura } from '../components/ui/HeroAura';
 import { CountUp } from '../components/ui/CountUp';
 import { useOrg } from '../contexts/OrgContext';
+import { useAuth } from '../contexts/AuthContext';
+import type { DemoRole } from '../lib/demo';
 
 /* ────────────────────────────────────────────────────────────────────────────
    Промо-страница LMSSI — «лицо продукта».
@@ -97,8 +99,14 @@ function Wordmark({ className = '' }: { className?: string }) {
   );
 }
 
+/** Демо-стенд: кнопки ведут к выбору роли и сразу в систему, без регистрации. */
+function useDemoEnabled() {
+  return !!useAuth().demo?.enabled;
+}
+
 /* ── Навигация ──────────────────────────────────────────────────────────────── */
 function LandingNav() {
+  const demoEnabled = useDemoEnabled();
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -159,13 +167,23 @@ function LandingNav() {
           >
             Войти
           </Link>
-          <Link
-            to="/register"
-            className="group inline-flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-brand shadow-lg shadow-brand/30 hover:-translate-y-0.5 transition-all"
-          >
-            Начать
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+          {demoEnabled ? (
+            <a
+              href="#roles"
+              className="group inline-flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-brand shadow-lg shadow-brand/30 hover:-translate-y-0.5 transition-all"
+            >
+              Демо
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+            </a>
+          ) : (
+            <Link
+              to="/register"
+              className="group inline-flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-brand shadow-lg shadow-brand/30 hover:-translate-y-0.5 transition-all"
+            >
+              Начать
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          )}
         </div>
       </nav>
     </motion.header>
@@ -303,6 +321,7 @@ function FloatingPreview() {
 
 /* ── Герой ──────────────────────────────────────────────────────────────────── */
 function Hero({ orgName }: { orgName: string }) {
+  const demoEnabled = useDemoEnabled();
   return (
     <section id="top" className="relative pt-36 sm:pt-44 pb-24 px-5 overflow-hidden">
       {/* Фоновые «дышащие» пятна */}
@@ -365,13 +384,23 @@ function Hero({ orgName }: { orgName: string }) {
             transition={{ duration: 0.7, delay: 0.24 }}
             className="mt-9 flex flex-wrap items-center gap-3"
           >
-            <Link
-              to="/register"
-              className="group inline-flex items-center gap-2 px-7 py-4 rounded-2xl text-base font-black text-white bg-brand shadow-xl shadow-brand/30 hover:-translate-y-1 transition-all"
-            >
-              Начать обучение
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Link>
+            {demoEnabled ? (
+              <a
+                href="#roles"
+                className="group inline-flex items-center gap-2 px-7 py-4 rounded-2xl text-base font-black text-white bg-brand shadow-xl shadow-brand/30 hover:-translate-y-1 transition-all"
+              >
+                Смотреть демо
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </a>
+            ) : (
+              <Link
+                to="/register"
+                className="group inline-flex items-center gap-2 px-7 py-4 rounded-2xl text-base font-black text-white bg-brand shadow-xl shadow-brand/30 hover:-translate-y-1 transition-all"
+              >
+                Начать обучение
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            )}
             <Link
               to="/login"
               className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl text-base font-bold text-slate-700 bg-white border border-slate-200 shadow-sm hover:-translate-y-0.5 hover:border-slate-300 transition-all"
@@ -619,9 +648,21 @@ function AISpotlight() {
 
 /* ── Роли / как это работает ────────────────────────────────────────────────── */
 function Roles() {
-  const roles = [
+  const demoEnabled = useDemoEnabled();
+  const roles: {
+    icon: typeof Building2;
+    demo: DemoRole;
+    as: string;
+    tag: string;
+    color: string;
+    bg: string;
+    title: string;
+    points: string[];
+  }[] = [
     {
       icon: Building2,
+      demo: 'admin',
+      as: 'Войти как администратор',
       tag: 'Администратор',
       color: '#7c3aed',
       bg: 'rgba(139,92,246,0.1)',
@@ -630,6 +671,8 @@ function Roles() {
     },
     {
       icon: Briefcase,
+      demo: 'hr',
+      as: 'Войти как HR',
       tag: 'HR-специалист',
       color: '#2563eb',
       bg: 'rgba(37,99,235,0.1)',
@@ -638,6 +681,8 @@ function Roles() {
     },
     {
       icon: GraduationCap,
+      demo: 'student',
+      as: 'Войти как сотрудник',
       tag: 'Сотрудник',
       color: '#059669',
       bg: 'rgba(16,185,129,0.1)',
@@ -657,13 +702,14 @@ function Roles() {
           <p className="mt-4 text-lg text-slate-500 font-medium">
             Каждая роль видит ровно то, что ей нужно. Данные текут естественно: должность → программа →
             прогресс → сертификат.
+            {demoEnabled && ' Зайдите под любой ролью — без регистрации, данные уже заполнены.'}
           </p>
         </Reveal>
 
         <div className="grid md:grid-cols-3 gap-5">
           {roles.map((r, i) => (
             <Reveal key={r.tag} delay={i * 0.1}>
-              <div className="relative h-full bento-card p-7 overflow-hidden">
+              <div className="relative h-full bento-card p-7 overflow-hidden flex flex-col">
                 <span
                   className="absolute top-6 right-6 text-6xl font-black opacity-[0.06]"
                   style={{ color: r.color }}
@@ -688,6 +734,16 @@ function Roles() {
                     </li>
                   ))}
                 </ul>
+                {demoEnabled && (
+                  <Link
+                    to={`/demo/${r.demo}`}
+                    className="group mt-auto pt-6 inline-flex items-center gap-2 text-sm font-black"
+                    style={{ color: r.color }}
+                  >
+                    {r.as}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                )}
               </div>
             </Reveal>
           ))}
