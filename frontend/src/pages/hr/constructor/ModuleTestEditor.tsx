@@ -221,7 +221,7 @@ function QuestionEditor({ question, index, onChange, onDelete }: QuestionEditorP
         {type === 'ordering' && (
           <>
             <p className="text-[11px] text-slate-400 font-semibold mb-1">
-              Расположите шаги в правильном порядке — студент увидит их перемешанными.
+              Расположите шаги в правильном порядке — сотрудник увидит их перемешанными.
             </p>
             {question.options.map((opt, optIdx) => (
               <div key={optIdx} className="flex items-center gap-2 group/opt">
@@ -340,7 +340,7 @@ export function ModuleTestEditor({ test, onChange }: Props) {
           <div className="flex items-start gap-2.5 rounded-2xl px-4 py-3 bg-brand/5 border border-brand/15">
             <Award className="w-4 h-4 text-brand shrink-0 mt-0.5" />
             <p className="text-[13px] font-medium text-slate-600 leading-snug">
-              Обязательный тест: студент должен набрать порог, чтобы получить сертификат.
+              Обязательный тест: сотрудник должен набрать порог, чтобы получить сертификат.
               Это не самопроверка — результат засчитывается.
             </p>
           </div>

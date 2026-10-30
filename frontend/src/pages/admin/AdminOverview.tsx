@@ -11,6 +11,7 @@ import { BentoCard } from '../../components/ui/BentoCard';
 import { HeroAura } from '../../components/ui/HeroAura';
 import { CountUp } from '../../components/ui/CountUp';
 import { DashboardSkeleton } from '../../components/ui/Skeleton';
+import { plural } from '../../lib/plural';
 
 interface Analytics {
   total_users: number;
@@ -91,7 +92,7 @@ export function AdminOverview() {
 
   const roleLegend = stats
     ? [
-        { label: 'Студенты', value: stats.by_role.student, color: '#6ee7b7' },
+        { label: 'Сотрудникы', value: stats.by_role.student, color: '#6ee7b7' },
         { label: 'HR-менеджеры', value: stats.by_role.hr, color: '#93c5fd' },
         { label: 'Администраторы', value: stats.by_role.admin, color: '#c4b5fd' },
       ]
@@ -218,7 +219,7 @@ export function AdminOverview() {
                         </div>
                         <div className="text-right shrink-0">
                           <span className="font-black text-slate-800 tabular-nums">{course.enrollment_count}</span>
-                          <span className="text-xs text-slate-400 ml-1">записей</span>
+                          <span className="text-xs text-slate-400 ml-1">{plural(course.enrollment_count, 'запись', 'записи', 'записей')}</span>
                         </div>
                       </div>
                     ))}

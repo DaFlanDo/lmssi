@@ -75,7 +75,7 @@ export function ConstructorHelpModal({ isOpen, onClose }: Props) {
             <div className="flex-1">
               <div className="text-sm font-bold text-slate-800">Тест модуля и итоговый тест</div>
               <p className="text-[13px] text-slate-600 font-medium leading-snug mt-0.5">
-                Обязательные проверки. Чтобы получить сертификат, студент должен пройти их с заданным
+                Обязательные проверки. Чтобы получить сертификат, сотрудник должен пройти их с заданным
                 порогом. В отличие от «Задания» и «Открытого ответа» внутри урока, эти тесты
                 <span className="font-bold text-slate-700"> засчитываются</span>.
               </p>
@@ -84,7 +84,7 @@ export function ConstructorHelpModal({ isOpen, onClose }: Props) {
         </section>
 
         <p className="text-[12px] text-slate-400 font-medium pt-1">
-          Подсказка: всё сохраняется автоматически. Кнопка «Превью» показывает урок глазами студента.
+          Подсказка: всё сохраняется автоматически. Кнопка «Превью» показывает урок глазами сотрудника.
         </p>
       </div>
     </Modal>

@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Award, X, ArrowRight } from 'lucide-react';
-import { LaurelOrnament } from './LaurelOrnament';
 
 interface Props {
   open: boolean;
@@ -38,10 +37,10 @@ export function CertificateAwardedModal({ open, certificateNumber, onClose }: Pr
             className="relative w-full max-w-md rounded-[28px] p-10 text-center overflow-hidden"
             style={{
               background:
-                'linear-gradient(135deg, #fdfbf3 0%, #f9f4e3 100%)',
-              border: '2px solid #c9a227',
+                '#ffffff',
+              border: '1px solid #c7d2fe',
               boxShadow:
-                '0 30px 80px -20px rgba(201,162,39,0.5), inset 0 0 0 6px #fdfbf3, inset 0 0 0 7px rgba(201,162,39,0.45)',
+                '0 30px 80px -20px rgba(30,58,138,0.2), inset 0 0 0 6px #ffffff, inset 0 0 0 7px rgba(30,58,138,0.2)',
             }}
           >
             <button
@@ -50,9 +49,6 @@ export function CertificateAwardedModal({ open, certificateNumber, onClose }: Pr
             >
               <X className="w-4 h-4" />
             </button>
-
-            <LaurelOrnament className="absolute top-2 left-2 opacity-50" size={70} />
-            <LaurelOrnament className="absolute bottom-2 right-2 opacity-50" size={70} />
 
             {/* Confetti dots */}
             {Array.from({ length: 14 }).map((_, i) => (
@@ -72,7 +68,7 @@ export function CertificateAwardedModal({ open, certificateNumber, onClose }: Pr
                 }}
                 className="absolute top-1/2 left-1/2 w-2 h-2 rounded-full pointer-events-none"
                 style={{
-                  background: i % 2 ? '#d4af37' : '#1e3a8a',
+                  background: i % 2 ? '#93c5fd' : '#1e3a8a',
                 }}
               />
             ))}
@@ -85,14 +81,14 @@ export function CertificateAwardedModal({ open, certificateNumber, onClose }: Pr
                 className="w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6"
                 style={{
                   background:
-                    'linear-gradient(135deg, #d4af37 0%, #b8860b 100%)',
-                  boxShadow: '0 12px 30px rgba(201,162,39,0.5)',
+                    'linear-gradient(135deg, #1e3a8a 0%, #3b5bdb 100%)',
+                  boxShadow: '0 12px 30px rgba(30,58,138,0.2)',
                 }}
               >
                 <Award className="w-12 h-12 text-white" />
               </motion.div>
 
-              <div className="text-[10px] tracking-[0.4em] uppercase text-amber-700 font-black mb-2">
+              <div className="text-[10px] tracking-[0.4em] uppercase text-blue-800 font-black mb-2">
                 Поздравляем!
               </div>
               <h2 className="cert-serif text-3xl font-black text-slate-900 mb-3">

@@ -43,7 +43,7 @@ function Medal({ size = 48 }: { size?: number }) {
         width: size,
         height: size,
         background: 'linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%)',
-        boxShadow: '0 6px 16px rgba(30,58,138,0.30), inset 0 0 0 1.5px rgba(201,162,39,0.55)',
+        boxShadow: '0 6px 16px rgba(30,58,138,0.30), inset 0 0 0 1.5px rgba(147,197,253,0.6)',
       }}
     >
       <Award className="text-white" style={{ width: size * 0.5, height: size * 0.5 }} />
@@ -121,7 +121,7 @@ export function MyCertificates() {
                     {avgScore !== null && (
                       <div className="px-5 py-3 rounded-2xl bg-slate-50 border border-slate-100 text-center min-w-[104px]">
                         <div className="text-xl font-black text-slate-800 flex items-center justify-center gap-1">
-                          <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+                          <Star className="w-4 h-4 text-blue-500 fill-blue-500" />
                           {avgScore}
                         </div>
                         <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mt-0.5">
@@ -155,7 +155,7 @@ export function MyCertificates() {
                           <Medal size={44} />
                           {cert.score !== null && (
                             <div className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-black text-brand bg-brand/[0.07] border border-brand/15">
-                              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                              <Star className="w-3.5 h-3.5 text-blue-500 fill-blue-500" />
                               {cert.score}
                             </div>
                           )}

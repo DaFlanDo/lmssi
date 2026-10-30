@@ -51,8 +51,8 @@ function IllustrationCourses() {
       <rect x="56" y="12" width="8" height="9" rx="2" fill="#1e3a8a" />
       <rect x="54" y="10" width="12" height="5" rx="2" fill="#1e3a8a" />
       {/* tassel */}
-      <line x1="78" y1="19" x2="84" y2="30" stroke="#d4af37" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="84" cy="32" r="2" fill="#d4af37" />
+      <line x1="78" y1="19" x2="84" y2="30" stroke="#3b5bdb" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="84" cy="32" r="2" fill="#3b5bdb" />
       <defs>
         <linearGradient id="bookSpine" x1="56" y1="24" x2="64" y2="24" gradientUnits="userSpaceOnUse">
           <stop stopColor="#2563eb" />
@@ -96,25 +96,25 @@ function IllustrationCertificates() {
       {/* lines of text */}
       <rect x="32" y="44" width="56" height="4" rx="2" fill="#c7d2fe" />
       <rect x="40" y="54" width="40" height="3" rx="1.5" fill="#ddd6fe" />
-      {/* gold ribbon */}
-      <circle cx="60" cy="15" r="12" fill="url(#medalGold)" />
-      <circle cx="60" cy="15" r="8" fill="url(#medalGoldInner)" />
-      <line x1="54" y1="4" x2="54" y2="-2" stroke="#d4af37" strokeWidth="2" strokeLinecap="round" />
-      <line x1="60" y1="3" x2="60" y2="-3" stroke="#d4af37" strokeWidth="2" strokeLinecap="round" />
-      <line x1="66" y1="4" x2="66" y2="-2" stroke="#d4af37" strokeWidth="2" strokeLinecap="round" />
+      {/* medal */}
+      <circle cx="60" cy="15" r="12" fill="url(#medalNavy)" />
+      <circle cx="60" cy="15" r="8" fill="url(#medalNavyInner)" />
+      <line x1="54" y1="4" x2="54" y2="-2" stroke="#3b5bdb" strokeWidth="2" strokeLinecap="round" />
+      <line x1="60" y1="3" x2="60" y2="-3" stroke="#3b5bdb" strokeWidth="2" strokeLinecap="round" />
+      <line x1="66" y1="4" x2="66" y2="-2" stroke="#3b5bdb" strokeWidth="2" strokeLinecap="round" />
       {/* star */}
       <path d="M60 9 L61.5 13 L66 13 L62.5 15.5 L64 20 L60 17.5 L56 20 L57.5 15.5 L54 13 L58.5 13 Z" fill="white" />
       {/* bottom seal */}
-      <circle cx="60" cy="72" r="10" fill="none" stroke="#d4af37" strokeWidth="1.5" strokeDasharray="3 2" />
-      <circle cx="60" cy="72" r="6" fill="#fef9c3" />
+      <circle cx="60" cy="72" r="10" fill="none" stroke="#3b5bdb" strokeWidth="1.5" strokeDasharray="3 2" />
+      <circle cx="60" cy="72" r="6" fill="#dbeafe" />
       <defs>
-        <linearGradient id="medalGold" x1="48" y1="3" x2="72" y2="27" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#f59e0b" />
-          <stop offset="1" stopColor="#d4af37" />
+        <linearGradient id="medalNavy" x1="48" y1="3" x2="72" y2="27" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#3b5bdb" />
+          <stop offset="1" stopColor="#1e3a8a" />
         </linearGradient>
-        <linearGradient id="medalGoldInner" x1="52" y1="7" x2="68" y2="23" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#fbbf24" />
-          <stop offset="1" stopColor="#b8860b" />
+        <linearGradient id="medalNavyInner" x1="52" y1="7" x2="68" y2="23" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#93c5fd" />
+          <stop offset="1" stopColor="#1e3a8a" />
         </linearGradient>
       </defs>
     </svg>

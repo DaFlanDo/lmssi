@@ -66,7 +66,7 @@ export function OpenAnswerBlock({ content, onChange }: EditorProps) {
               <Sparkles className="w-3 h-3" /> ИИ-проверка
             </span>
           </div>
-          <div className="text-xs text-slate-400 font-medium">Студент пишет развёрнутый ответ, ИИ оценивает понимание</div>
+          <div className="text-xs text-slate-400 font-medium">Сотрудник пишет развёрнутый ответ, ИИ оценивает понимание</div>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export function OpenAnswerBlock({ content, onChange }: EditorProps) {
         </div>
         <div>
           <label className="block text-xs font-bold text-slate-500 mb-1.5 pl-1">
-            Критерии оценивания <span className="font-medium text-slate-400">(необязательно, скрыто от студента)</span>
+            Критерии оценивания <span className="font-medium text-slate-400">(необязательно, скрыто от сотрудника)</span>
           </label>
           <AutoTextarea
             value={data.criteria}

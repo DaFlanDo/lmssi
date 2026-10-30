@@ -15,7 +15,7 @@ import { EmptyState } from '../../components/ui/EmptyState';
 const ROLE_META: Record<string, { label: string; bg: string; color: string; icon: React.ElementType }> = {
   admin: { label: 'Администратор', bg: 'rgba(139,92,246,0.1)', color: '#7c3aed', icon: Shield },
   hr: { label: 'HR-менеджер', bg: 'rgba(37,99,235,0.1)', color: '#2563eb', icon: UserCheck },
-  student: { label: 'Студент', bg: 'rgba(16,185,129,0.08)', color: '#059669', icon: GraduationCap },
+  student: { label: 'Сотрудник', bg: 'rgba(16,185,129,0.08)', color: '#059669', icon: GraduationCap },
 };
 
 interface FancyOption {
@@ -184,7 +184,7 @@ export function AdminUsers() {
     { key: 'all', label: 'Все', count: users.length },
     { key: 'admin', label: 'Админы', count: users.filter(u => u.role === 'admin').length },
     { key: 'hr', label: 'HR', count: users.filter(u => u.role === 'hr').length },
-    { key: 'student', label: 'Студенты', count: users.filter(u => u.role === 'student').length },
+    { key: 'student', label: 'Сотрудникы', count: users.filter(u => u.role === 'student').length },
   ];
 
   return (

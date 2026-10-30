@@ -45,7 +45,7 @@ interface UserProfile {
 const ROLE_META: Record<string, { label: string; bg: string; color: string; icon: React.ElementType }> = {
   admin: { label: 'Администратор', bg: 'rgba(139,92,246,0.1)', color: '#7c3aed', icon: Shield },
   hr: { label: 'HR-менеджер', bg: 'rgba(37,99,235,0.1)', color: '#2563eb', icon: UserCheck },
-  student: { label: 'Студент', bg: 'rgba(16,185,129,0.08)', color: '#059669', icon: GraduationCap },
+  student: { label: 'Сотрудник', bg: 'rgba(16,185,129,0.08)', color: '#059669', icon: GraduationCap },
 };
 
 function formatDate(iso: string | null): string {

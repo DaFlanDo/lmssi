@@ -163,7 +163,7 @@ export function StudentCourse() {
         setActiveItem(nextOrderedItem);
       }
     } catch (err) {
-      // Серверный гейт вернул причину (409) — показываем её студенту
+      // Серверный гейт вернул причину (409) — показываем её сотруднику
       setCompleteError(err instanceof Error ? err.message : 'Не удалось завершить урок');
     } finally {
       setCompleting(false);

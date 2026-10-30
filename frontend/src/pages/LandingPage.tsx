@@ -61,11 +61,8 @@ function Reveal({
 }
 
 /** Маленький бейдж-«пилюля» над заголовком секции. */
-function Eyebrow({ children, tone = 'blue' }: { children: ReactNode; tone?: 'blue' | 'gold' }) {
-  const styles =
-    tone === 'gold'
-      ? { background: 'rgba(245,158,11,0.1)', color: '#b45309', border: '1px solid rgba(245,158,11,0.22)' }
-      : { background: 'rgba(37,99,235,0.08)', color: '#2563eb', border: '1px solid rgba(37,99,235,0.16)' };
+function Eyebrow({ children }: { children: ReactNode }) {
+  const styles = { background: 'rgba(37,99,235,0.08)', color: '#2563eb', border: '1px solid rgba(37,99,235,0.16)' };
   return (
     <span
       className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest"
@@ -87,7 +84,7 @@ function Wordmark({ className = '' }: { className?: string }) {
       <span style={{ color: '#1e293b' }}>LMS</span>
       <span
         style={{
-          background: 'linear-gradient(to right, #2563eb, #d4af37)',
+          background: 'linear-gradient(to right, #2563eb, #1e3a8a)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
@@ -276,13 +273,13 @@ function FloatingPreview() {
         className="absolute -right-5 -bottom-5 sm:-right-8 rounded-2xl px-4 py-3 flex items-center gap-3"
         style={{
           background: 'white',
-          boxShadow: '0 20px 50px -12px rgba(201,162,39,0.4)',
-          border: '1px solid rgba(212,175,55,0.25)',
+          boxShadow: '0 20px 50px -12px rgba(30,58,138,0.18)',
+          border: '1px solid rgba(30,58,138,0.11)',
         }}
       >
         <div
           className="w-10 h-10 rounded-xl flex items-center justify-center"
-          style={{ background: 'linear-gradient(135deg, #d4af37, #b8860b)' }}
+          style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #3b5bdb 100%)' }}
         >
           <Award className="w-5 h-5 text-white" />
         </div>
@@ -504,7 +501,7 @@ const FEATURES: Feature[] = [
   {
     icon: Blocks,
     title: 'Конструктор drag-and-drop',
-    text: 'Текст, видео, тесты, чек-листы и открытые задания. Slash-меню, автосохранение и живое превью «как видит студент».',
+    text: 'Текст, видео, тесты, чек-листы и открытые задания. Slash-меню, автосохранение и живое превью «как видит сотрудник».',
     span: 'md:col-span-7',
     accent: 'blue',
   },
@@ -759,12 +756,12 @@ function Certificates() {
     <section id="certificates" className="px-5 py-20 scroll-mt-24">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         <Reveal>
-          <Eyebrow tone="gold">Сертификаты</Eyebrow>
+          <Eyebrow>Сертификаты</Eyebrow>
           <h2 className="mt-5 text-4xl sm:text-5xl font-black text-slate-900" style={{ letterSpacing: '-0.02em' }}>
             Достижение, которому{' '}
             <span
               style={{
-                background: 'linear-gradient(120deg, #b8860b, #d4af37 50%, #b8860b)',
+                background: 'linear-gradient(120deg, #1e3a8a, #3b5bdb 50%, #1e3a8a)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -786,9 +783,9 @@ function Certificates() {
               <li key={t} className="flex items-center gap-3 text-base font-semibold text-slate-700">
                 <span
                   className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                  style={{ background: 'rgba(212,175,55,0.14)' }}
+                  style={{ background: 'rgba(30,58,138,0.06)' }}
                 >
-                  <ShieldCheck className="w-4 h-4" style={{ color: '#b8860b' }} />
+                  <ShieldCheck className="w-4 h-4" style={{ color: '#1e3a8a' }} />
                 </span>
                 {t}
               </li>
@@ -803,8 +800,8 @@ function Certificates() {
             initial={{ rotate: -2 }}
             className="relative rounded-[24px] bg-white p-8 sm:p-10"
             style={{
-              boxShadow: '0 40px 80px -24px rgba(201,162,39,0.35)',
-              border: '1px solid rgba(212,175,55,0.2)',
+              boxShadow: '0 40px 80px -24px rgba(30,58,138,0.16)',
+              border: '1px solid rgba(30,58,138,0.09)',
             }}
           >
             {/* двойная рамка */}
@@ -814,12 +811,12 @@ function Certificates() {
             />
             <div
               className="absolute inset-5 rounded-[12px] pointer-events-none"
-              style={{ border: '1px solid rgba(201,162,39,0.4)' }}
+              style={{ border: '1px solid rgba(30,58,138,0.18)' }}
             />
             <div className="relative text-center py-4">
               <div
                 className="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center mb-5"
-                style={{ background: 'linear-gradient(135deg, #d4af37, #b8860b)' }}
+                style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #3b5bdb 100%)' }}
               >
                 <Trophy className="w-7 h-7 text-white" />
               </div>
@@ -830,7 +827,7 @@ function Certificates() {
               >
                 Иван Иванов
               </p>
-              <div className="my-4 mx-auto w-24 h-px" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
+              <div className="my-4 mx-auto w-24 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(30,58,138,0.45), transparent)' }} />
               <p className="text-sm font-semibold text-slate-500">успешно завершил курс</p>
               <p className="text-base font-extrabold text-slate-800 mt-1">«Информационная безопасность для всех»</p>
               <div className="mt-6 flex items-center justify-between text-[11px] font-bold text-slate-400">

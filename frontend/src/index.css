@@ -223,21 +223,17 @@
   border-radius: 20px;
   pointer-events: none;
 }
-/* Inner border: gold accent */
+/* Inner border: тонкая тёмно-синяя линия */
 .cert-paper::after {
   content: '';
   position: absolute;
   inset: 28px;
-  border: 1px solid rgba(201, 162, 39, 0.38);
+  border: 1px solid rgba(30, 58, 138, 0.18);
   border-radius: 12px;
   pointer-events: none;
 }
-.cert-gold-text {
-  background: linear-gradient(180deg, #b8860b 0%, #d4af37 45%, #fff7c2 55%, #d4af37 70%, #8a6508 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.05));
+.cert-accent-text {
+  color: #1e3a8a;
 }
 .cert-name {
   font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
@@ -278,17 +274,17 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #c9a227;
+  color: #1e3a8a;
 }
 .cert-divider::before,
 .cert-divider::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #c9a227, transparent);
+  background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.35), transparent);
 }
 
-/* Wheat ornament dots */
+/* Угловые украшения */
 .cert-corner {
   position: absolute;
   width: 60px;

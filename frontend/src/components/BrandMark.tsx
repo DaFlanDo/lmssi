@@ -22,16 +22,16 @@ export function BrandMark({ size = 36, className = '' }: Props) {
         <linearGradient id="lumen-flame" x1="0" y1="1" x2="0.6" y2="0">
           <stop offset="0%" stopColor="#1e3a8a" />
           <stop offset="55%" stopColor="#2563eb" />
-          <stop offset="100%" stopColor="#d4af37" />
+          <stop offset="100%" stopColor="#93c5fd" />
         </linearGradient>
         <linearGradient id="lumen-flame-2" x1="0" y1="1" x2="0.4" y2="0">
           <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.95" />
-          <stop offset="100%" stopColor="#fbbf24" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#93c5fd" stopOpacity="0.95" />
         </linearGradient>
         <radialGradient id="lumen-spark" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0%" stopColor="#fff7c2" />
-          <stop offset="40%" stopColor="#fbbf24" />
-          <stop offset="100%" stopColor="#d4af37" stopOpacity="0.4" />
+          <stop offset="0%" stopColor="#eff6ff" />
+          <stop offset="40%" stopColor="#93c5fd" />
+          <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.4" />
         </radialGradient>
         <filter id="lumen-glow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="1.4" />
@@ -54,7 +54,7 @@ export function BrandMark({ size = 36, className = '' }: Props) {
 
       {/* Венчающая искра — свечение */}
       <circle cx="24" cy="5" r="3.4" fill="url(#lumen-spark)" filter="url(#lumen-glow)" />
-      <circle cx="24" cy="5" r="1.6" fill="#fff7c2" />
+      <circle cx="24" cy="5" r="1.6" fill="#eff6ff" />
 
       {/* Тонкое основание-блик */}
       <ellipse cx="18" cy="40.5" rx="9" ry="1.1" fill="#1e3a8a" opacity="0.18" />

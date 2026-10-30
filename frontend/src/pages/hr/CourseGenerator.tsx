@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { plural } from '../../lib/plural';
 import {
   ArrowLeft, Upload, FileText, Sparkles, Settings2,
   CheckCircle2, AlertCircle, Loader2, X, Wand2, BookOpen, ClipboardList,
@@ -40,15 +41,6 @@ const LEVEL_OPTIONS: { key: Level; label: string }[] = [
   { key: 'novice',      label: 'Новичок' },
   { key: 'experienced', label: 'Опытный' },
 ];
-
-// Русское склонение: plural(5, 'урок', 'урока', 'уроков') → 'уроков'
-function plural(n: number, one: string, few: string, many: string): string {
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod10 === 1 && mod100 !== 11) return one;
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return few;
-  return many;
-}
 
 interface JobStatus {
   job_id: string;

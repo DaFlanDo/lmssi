@@ -26,7 +26,7 @@ export function AiBlock({ content, onChange }: Props) {
           </div>
           <div>
             <h4 className="font-extrabold text-slate-800 text-lg">ИИ-Наставник (Диалог)</h4>
-            <p className="text-sm text-slate-500 font-medium">Студент сможет общаться с ботом</p>
+            <p className="text-sm text-slate-500 font-medium">Сотрудник сможет общаться с ботом</p>
           </div>
         </div>
 

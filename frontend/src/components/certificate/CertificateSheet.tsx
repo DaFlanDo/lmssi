@@ -35,16 +35,15 @@ function Corner({ pos }: { pos: 'tl' | 'tr' | 'bl' | 'br' }) {
     position: 'absolute',
     width: 26,
     height: 26,
-    borderColor: NAVY,
+    borderColor: '#2563eb',
     borderStyle: 'solid',
     borderWidth: 0,
-    opacity: 0.55,
   };
   const map: Record<string, React.CSSProperties> = {
-    tl: { top: 30, left: 30, borderTopWidth: 1.5, borderLeftWidth: 1.5 },
-    tr: { top: 30, right: 30, borderTopWidth: 1.5, borderRightWidth: 1.5 },
-    bl: { bottom: 30, left: 30, borderBottomWidth: 1.5, borderLeftWidth: 1.5 },
-    br: { bottom: 30, right: 30, borderBottomWidth: 1.5, borderRightWidth: 1.5 },
+    tl: { top: 30, left: 30, borderTopWidth: 2, borderLeftWidth: 2 },
+    tr: { top: 30, right: 30, borderTopWidth: 2, borderRightWidth: 2 },
+    bl: { bottom: 30, left: 30, borderBottomWidth: 2, borderLeftWidth: 2 },
+    br: { bottom: 30, right: 30, borderBottomWidth: 2, borderRightWidth: 2 },
   };
   return <div style={{ ...base, ...map[pos] }} />;
 }
@@ -57,8 +56,10 @@ const S = {
     aspectRatio: '1.414 / 1',
     borderRadius: 24,
     overflow: 'hidden',
-    background: '#ffffff',
-    boxShadow: '0 32px 80px -24px rgba(30,58,138,0.30), 0 0 0 1px rgba(37,99,235,0.06)',
+    background: 'linear-gradient(135deg, #172554 0%, #1e40af 45%, #3b82f6 100%)',
+    boxShadow: '0 32px 80px -24px rgba(30,58,138,0.45)',
+    WebkitPrintColorAdjust: 'exact' as const,
+    printColorAdjust: 'exact' as const,
   },
   content: {
     position: 'relative' as const,
@@ -86,20 +87,18 @@ export function CertificateSheet({ data }: { data: CertificateSheetData }) {
 
   return (
     <div id="certificate-sheet" style={S.root}>
-      {/* Очень мягкий тон сверху — ощущение бумаги, без пестроты */}
+      {/* Лист на синей подложке: подложка видна как широкая рамка */}
       <div
         style={{
           position: 'absolute',
-          inset: 0,
+          inset: 14,
+          borderRadius: 14,
           background:
-            'radial-gradient(900px 380px at 50% -8%, rgba(37,99,235,0.05), transparent 60%)',
+            'radial-gradient(900px 420px at 50% -10%, #dbeafe, transparent 62%), radial-gradient(700px 320px at 50% 110%, #eff6ff, transparent 60%), #ffffff',
           pointerEvents: 'none',
         }}
       />
-
-      {/* Одинарная тонкая рамка + волосок внутри (тон-в-тон, без золота) */}
-      <div style={{ position: 'absolute', inset: 20, border: `1.5px solid ${NAVY}`, borderRadius: 16, pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', inset: 27, border: '1px solid rgba(30,58,138,0.14)', borderRadius: 11, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', inset: 22, border: '1px solid rgba(37,99,235,0.28)', borderRadius: 9, pointerEvents: 'none' }} />
 
       <Corner pos="tl" />
       <Corner pos="tr" />
@@ -129,8 +128,8 @@ export function CertificateSheet({ data }: { data: CertificateSheetData }) {
             >
               СЕРТИФИКАТ
             </h1>
-            {/* единственный тёплый штрих на всём документе */}
-            <div style={{ width: 64, height: 2, borderRadius: 2, marginTop: 12, background: 'linear-gradient(90deg, transparent, #c9a227, transparent)' }} />
+            {/* короткая синяя черта под заголовком */}
+            <div style={{ width: 64, height: 2, borderRadius: 2, marginTop: 12, background: 'linear-gradient(90deg, transparent, #3b82f6, transparent)' }} />
             <div style={{ ...S.eyebrow, marginTop: 12 }}>об успешном прохождении курса</div>
           </div>
         </div>

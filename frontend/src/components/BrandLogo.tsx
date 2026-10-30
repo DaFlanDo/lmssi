@@ -5,7 +5,7 @@
 interface Props {
   size?: number;
   className?: string;
-  variant?: 'gradient' | 'gold' | 'mono';
+  variant?: 'gradient' | 'navy' | 'mono';
   withGlow?: boolean;
 }
 
@@ -17,7 +17,7 @@ export function BrandLogo({
 }: Props) {
   const gradients = {
     gradient: ['#3b82f6', '#1d4ed8'],
-    gold: ['#d4af37', '#b8860b'],
+    navy: ['#1e3a8a', '#172554'],
     mono: ['#1e293b', '#0f172a'],
   };
   const [c1, c2] = gradients[variant];
@@ -34,8 +34,8 @@ export function BrandLogo({
         boxShadow: withGlow
           ? variant === 'gradient'
             ? `0 ${size * 0.1}px ${size * 0.45}px rgba(37,99,235,0.42)`
-            : variant === 'gold'
-              ? `0 ${size * 0.1}px ${size * 0.45}px rgba(201,162,39,0.42)`
+            : variant === 'navy'
+              ? `0 ${size * 0.1}px ${size * 0.45}px rgba(30,58,138,0.4)`
               : `0 ${size * 0.1}px ${size * 0.4}px rgba(15,23,42,0.3)`
           : undefined,
         display: 'flex',

@@ -12,6 +12,7 @@ import { HeroAura } from '../../components/ui/HeroAura';
 import { CountUp } from '../../components/ui/CountUp';
 import { DashboardSkeleton } from '../../components/ui/Skeleton';
 import { useAuth } from '../../contexts/AuthContext';
+import { plural } from '../../lib/plural';
 
 export function HRDashboard() {
   const { user } = useAuth();
@@ -177,7 +178,7 @@ export function HRDashboard() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-bold text-slate-800 text-sm truncate">{c.title}</p>
-                        <p className="text-xs text-slate-400 font-medium">{c.lesson_count} уроков</p>
+                        <p className="text-xs text-slate-400 font-medium">{c.lesson_count} {plural(c.lesson_count, 'урок', 'урока', 'уроков')}</p>
                       </div>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${c.is_published ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500'}`}>
                         {c.is_published ? 'Опубликован' : 'Черновик'}

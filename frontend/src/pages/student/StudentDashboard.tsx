@@ -5,7 +5,6 @@ import { ArrowRight, BookOpen, GraduationCap, Award, AlertTriangle, Clock, Brief
 import { Link } from 'react-router-dom';
 import { apiGet } from '../../lib/api';
 import type { EnrollmentRead, CourseListItem, CourseProgressRead, CertificateRead } from '../../types';
-import { LaurelOrnament } from '../../components/certificate/LaurelOrnament';
 import { PageLayout } from '../../components/layout/PageLayout';
 import { Sidebar } from '../../components/Sidebar';
 import { Navbar } from '../../components/layout/Navbar';
@@ -225,34 +224,26 @@ export function StudentDashboard() {
                     className="relative rounded-[28px] p-5 overflow-hidden flex items-center gap-5 transition-all hover:-translate-y-1"
                     style={{
                       background:
-                        'linear-gradient(135deg, #fdfbf3 0%, #f9f4e3 100%)',
-                      border: '2px solid #c9a227',
-                      boxShadow:
-                        '0 10px 30px -10px rgba(201,162,39,0.3), inset 0 0 0 5px #fdfbf3, inset 0 0 0 6px rgba(201,162,39,0.4)',
+                        '#ffffff',
+                      border: '1px solid #c7d2fe',
+                      boxShadow: '0 10px 30px -12px rgba(30,58,138,0.18)',
                     }}
                   >
-                    <LaurelOrnament className="absolute -bottom-2 -right-2 opacity-40" size={110} />
                     <div
                       className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 relative z-10"
                       style={{
-                        background: 'linear-gradient(135deg, #d4af37 0%, #b8860b 100%)',
-                        boxShadow: '0 8px 20px rgba(201,162,39,0.4)',
+                        background: 'linear-gradient(135deg, #1e3a8a 0%, #3b5bdb 100%)',
+                        boxShadow: '0 8px 20px rgba(30,58,138,0.18)',
                       }}
                     >
                       <Award className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1 relative z-10">
-                      <div className="text-[10px] tracking-[0.25em] uppercase text-amber-700 font-bold mb-0.5">
+                      <div className="text-[10px] tracking-[0.25em] uppercase text-blue-800 font-bold mb-0.5">
                         Ваши достижения
                       </div>
                       <div className="cert-serif text-lg font-black text-slate-900">
-                        {certificates.length}{' '}
-                        {certificates.length === 1
-                          ? 'сертификат'
-                          : certificates.length < 5
-                            ? 'сертификата'
-                            : 'сертификатов'}{' '}
-                        получено
+                        Получено сертификатов: {certificates.length}
                       </div>
                     </div>
                     <div className="flex items-center gap-2 text-brand-dark font-bold text-sm relative z-10 group-hover:gap-3 transition-all">

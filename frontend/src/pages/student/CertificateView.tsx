@@ -52,7 +52,7 @@ export function CertificateView() {
       className="min-h-screen py-10 px-4"
       style={{
         background:
-          'radial-gradient(1200px 600px at 50% 0%, rgba(212,175,55,0.18), transparent 60%), radial-gradient(900px 600px at 50% 100%, rgba(30,58,138,0.12), transparent 60%), #f8fafc',
+          'radial-gradient(1200px 600px at 50% 0%, rgba(59,91,219,0.08), transparent 60%), radial-gradient(900px 600px at 50% 100%, rgba(30,58,138,0.12), transparent 60%), #f8fafc',
       }}
     >
       {/* Header */}

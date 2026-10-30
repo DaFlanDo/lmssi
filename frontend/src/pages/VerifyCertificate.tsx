@@ -4,7 +4,6 @@ import { ShieldCheck, ShieldX, Award, Calendar, User, BookOpen } from 'lucide-re
 import { publicGet } from '../lib/api';
 import type { CertificateVerification } from '../types';
 import { LoadingSpinner } from '../components/ui/LoadingSpinner';
-import { LaurelOrnament } from '../components/certificate/LaurelOrnament';
 import { BrandLogo } from '../components/BrandLogo';
 
 function formatDate(d: string | null): string {
@@ -45,7 +44,7 @@ export function VerifyCertificate() {
       className="min-h-screen flex flex-col items-center justify-center px-4 py-10"
       style={{
         background:
-          'radial-gradient(1200px 600px at 50% 0%, rgba(212,175,55,0.18), transparent 60%), radial-gradient(900px 600px at 50% 100%, rgba(30,58,138,0.12), transparent 60%), #f8fafc',
+          'radial-gradient(1200px 600px at 50% 0%, rgba(30,58,138,0.08), transparent 60%), radial-gradient(900px 600px at 50% 100%, rgba(30,58,138,0.12), transparent 60%), #f8fafc',
       }}
     >
       {/* Header brand */}
@@ -65,16 +64,12 @@ export function VerifyCertificate() {
         className="w-full max-w-2xl rounded-[28px] p-10 relative overflow-hidden"
         style={{
           background:
-            'linear-gradient(135deg, #fdfbf3 0%, #f9f4e3 100%)',
-          border: '2px solid #c9a227',
+            '#ffffff',
+          border: '1px solid #c7d2fe',
           boxShadow:
-            '0 25px 60px -15px rgba(201,162,39,0.35), inset 0 0 0 6px #fdfbf3, inset 0 0 0 7px rgba(201,162,39,0.4)',
+            '0 25px 60px -15px rgba(30,58,138,0.16), inset 0 0 0 6px #ffffff, inset 0 0 0 7px rgba(30,58,138,0.18)',
         }}
       >
-        <LaurelOrnament className="absolute top-4 left-4 opacity-50" size={70} />
-        <LaurelOrnament className="absolute top-4 right-4 opacity-50" size={70} flip />
-        <LaurelOrnament className="absolute bottom-4 left-4 opacity-50" size={70} flip />
-        <LaurelOrnament className="absolute bottom-4 right-4 opacity-50" size={70} />
 
         <div className="relative z-10 flex flex-col items-center text-center">
           {data?.valid ? (
@@ -107,7 +102,7 @@ export function VerifyCertificate() {
               <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 <div
                   className="p-4 rounded-2xl text-left"
-                  style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(201,162,39,0.25)' }}
+                  style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(30,58,138,0.11)' }}
                 >
                   <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-slate-500 font-bold mb-2">
                     <User className="w-3.5 h-3.5" /> Владелец
@@ -118,7 +113,7 @@ export function VerifyCertificate() {
                 </div>
                 <div
                   className="p-4 rounded-2xl text-left"
-                  style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(201,162,39,0.25)' }}
+                  style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(30,58,138,0.11)' }}
                 >
                   <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-slate-500 font-bold mb-2">
                     <Calendar className="w-3.5 h-3.5" /> Дата выдачи
@@ -129,7 +124,7 @@ export function VerifyCertificate() {
                 </div>
                 <div
                   className="p-4 rounded-2xl text-left sm:col-span-2"
-                  style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(201,162,39,0.25)' }}
+                  style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(30,58,138,0.11)' }}
                 >
                   <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-slate-500 font-bold mb-2">
                     <BookOpen className="w-3.5 h-3.5" /> Программа обучения
@@ -141,7 +136,7 @@ export function VerifyCertificate() {
                 {data.score !== null && (
                   <div
                     className="p-4 rounded-2xl text-left sm:col-span-2 flex items-center justify-between"
-                    style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(201,162,39,0.25)' }}
+                    style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid rgba(30,58,138,0.11)' }}
                   >
                     <div>
                       <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-slate-500 font-bold mb-1">
@@ -151,7 +146,7 @@ export function VerifyCertificate() {
                         Чем выше — тем лучше освоен материал
                       </div>
                     </div>
-                    <div className="cert-gold-text cert-serif text-3xl font-black">
+                    <div className="cert-accent-text cert-serif text-3xl font-black">
                       {data.score}/100
                     </div>
                   </div>

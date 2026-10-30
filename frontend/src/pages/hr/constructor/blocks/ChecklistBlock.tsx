@@ -60,7 +60,7 @@ export function ChecklistBlock({ content, onChange }: Props) {
           <CheckSquare className="w-3.5 h-3.5" style={{ color: '#2563eb' }} />
         </div>
         <span className="text-[10px] font-black text-brand uppercase tracking-widest">Чеклист</span>
-        <span className="text-[10px] text-slate-300 font-medium ml-1">· студент отмечает пункты</span>
+        <span className="text-[10px] text-slate-300 font-medium ml-1">· сотрудник отмечает пункты</span>
       </div>
 
       <div className="space-y-1.5">

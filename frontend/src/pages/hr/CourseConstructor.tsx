@@ -753,7 +753,7 @@ export function CourseConstructor() {
             onClick={() => setShowPreview(true)}
             disabled={!activeItem}
             className="px-4 py-2 bg-white border border-slate-200 hover:border-brand/40 hover:text-brand text-slate-600 rounded-full text-sm font-bold transition-all flex items-center gap-2 disabled:opacity-50"
-            title="Предпросмотр как видит студент"
+            title="Предпросмотр как видит сотрудник"
           >
             <Eye className="w-4 h-4" />
             <span className="hidden sm:inline">Превью</span>
@@ -961,7 +961,7 @@ export function CourseConstructor() {
       </Modal>
 
       {/* Student preview */}
-      <Modal isOpen={showPreview} onClose={() => setShowPreview(false)} title="Предпросмотр · как видит студент" maxWidth="max-w-3xl">
+      <Modal isOpen={showPreview} onClose={() => setShowPreview(false)} title="Предпросмотр · как видит сотрудник" maxWidth="max-w-3xl">
         <div className="max-h-[70vh] overflow-y-auto pr-1 -mr-1">
           <LessonPreview lesson={activeLesson} test={activeTest} />
         </div>

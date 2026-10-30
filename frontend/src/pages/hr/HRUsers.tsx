@@ -15,6 +15,7 @@ import { Modal } from '../../components/ui/Modal';
 import { LoadingSpinner } from '../../components/ui/LoadingSpinner';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { Select } from '../../components/ui/Select';
+import { plural } from '../../lib/plural';
 
 export function HRUsers() {
   const navigate = useNavigate();
@@ -159,7 +160,7 @@ export function HRUsers() {
   const courseOptions = courses.map((c) => ({
     value: c.id,
     label: c.title,
-    description: c.description?.slice(0, 80) || `${c.module_count} модулей · ${c.lesson_count} уроков`,
+    description: c.description?.slice(0, 80) || `${c.module_count} ${plural(c.module_count, 'модуль', 'модуля', 'модулей')} · ${c.lesson_count} ${plural(c.lesson_count, 'урок', 'урока', 'уроков')}`,
     disabled: enrolledCourseIds.has(c.id),
     disabledReason: enrolledCourseIds.has(c.id) ? 'Уже назначен этому сотруднику' : undefined,
   }));

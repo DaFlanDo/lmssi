@@ -69,7 +69,7 @@ function PreviewOpenAnswer({ content }: { content: string }) {
       </h4>
       <p className="text-amber-900 font-black text-lg mb-4">{data.prompt || 'Раскройте тему урока своими словами.'}</p>
       <div className="w-full h-24 rounded-xl border-2 border-amber-200 bg-white/70 flex items-center justify-center text-slate-300 font-medium text-sm">
-        Поле для развёрнутого ответа студента
+        Поле для развёрнутого ответа сотрудника
       </div>
     </div>
   );

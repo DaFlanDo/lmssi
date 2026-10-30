@@ -115,7 +115,7 @@ export function CalloutBlock({ content, onChange }: Props) {
           onChange={(e) => update({ text: e.target.value })}
           placeholder={
             data.variant === 'info'
-              ? 'Важная информация для студента...'
+              ? 'Важная информация для сотрудника...'
               : data.variant === 'warning'
               ? 'Предупреждение или ограничение...'
               : 'Полезный совет или лайфхак...'
